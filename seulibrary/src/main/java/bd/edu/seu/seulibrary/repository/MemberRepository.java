@@ -1,0 +1,13 @@
+package bd.edu.seu.seulibrary.repository;
+
+import bd.edu.seu.seulibrary.model.Member;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface MemberRepository  extends JpaRepository<Member, Integer> {
+    Member findByMemberIdAndPassword(int memberId, String password);
+    List<Member> findByName(String name);
+}

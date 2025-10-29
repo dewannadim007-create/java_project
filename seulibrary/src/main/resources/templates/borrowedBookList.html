@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Borrowed Books - Admin</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<header>
+    <h1>Borrowed Books</h1>
+</header>
+
+<main>
+    <section class="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>Book Title</th>
+                <th>Member ID</th>
+                <th>Member Name</th>
+                <th>Borrow Date</th>
+                <th>Return Date</th>
+                <th>Returned</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="borrowedBook : ${borrowedBooks}">
+                <tr>
+                    <td th:text="${borrowedBook.book.title}"></td>
+                    <td th:text="${borrowedBook.member.memberId}"></td>
+                    <td th:text="${borrowedBook.member.name}"></td>
+                    <td th:text="${borrowedBook.borrowedDate}"></td>
+                    <td th:text="${borrowedBook.returnedDate}"></td>
+                    <td th:text="${borrowedBook.returned ? 'Yes' : 'No'}"></td>
+                    <td>
+
+                        <form th:action="@{/admin/delete_borrowed_book/{borrowedBookId}(borrowedBookId=${borrowedBook.borrowedBookId})}" method="post">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="navigation">
+
+        <a th:href="@{/admin/home}">
+            <button type="button" class="back-btn">Back to Admin Home</button>
+        </a>
+    </section>
+</main>
+
+</body>
+
+<style>
+    body {
+        background-color: #f2f2f2;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    header {
+        background-color: #0056b3;
+        color: white;
+        padding: 20px;
+        text-align: center;
+    }
+
+    h1 {
+        margin: 0;
+    }
+
+    main {
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .table-container {
+        background-color: white;
+        padding: 20px;
+        display: inline-block;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 800px;
+        margin-bottom: 30px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #007bff;
+        color: white;
+    }
+
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    button {
+        padding: 8px 15px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+        margin-right: 5px;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    .back-btn {
+        padding: 12px 25px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+        width: 100%;
+    }
+
+    .back-btn:hover {
+        background-color: #218838;
+    }
+
+    .navigation {
+        width: 100%;
+        max-width: 500px;
+    }
+
+    a {
+        text-decoration: none;
+    }
+</style>
+
+</html>

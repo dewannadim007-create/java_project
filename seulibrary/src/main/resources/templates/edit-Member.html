@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Member - SEU Library</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Edit Member Details</h1>
+    <button class="back-btn" onclick="location.href='/admin/memberList'">
+      <span class="icon">←</span> Back to List
+    </button>
+  </header>
+
+  <main class="edit-form-container">
+    <div class="form-card">
+      <form method="POST" action="/admin/save-member" th:object="${member}">
+        <input type="hidden" th:field="*{memberId}"/>
+
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" th:field="*{name}" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" th:field="*{email}" required>
+        </div>
+
+        <div class="form-group">
+          <label for="mobile">Mobile Number</label>
+          <input type="tel" id="mobile" th:field="*{mobile}" required>
+        </div>
+
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input type="text" id="address" th:field="*{address}" required>
+        </div>
+>
+        <input type="hidden" th:field="*{password}" />
+
+        <div class="form-actions">
+          <button type="submit" class="save-btn">
+            <span class="icon">💾</span> Save Changes
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </main>
+</div>
+</body>
+<style>
+  :root {
+    --primary-color: #4361ee;
+    --secondary-color: #3f37c9;
+    --accent-color: #4895ef;
+    --light-color: #f8f9fa;
+    --dark-color: #212529;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f7fa;
+    color: var(--dark-color);
+    line-height: 1.6;
+    padding: 0;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+
+  header h1 {
+    color: var(--primary-color);
+    font-weight: 500;
+    font-size: 28px;
+  }
+
+  .edit-form-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .form-card {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 30px;
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #495057;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    font-size: 16px;
+    transition: var(--transition);
+  }
+
+  input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(72, 149, 239, 0.2);
+  }
+
+  .form-actions {
+    margin-top: 30px;
+    text-align: right;
+  }
+
+  button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 16px;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .back-btn {
+    background-color: #6c757d;
+    color: white;
+  }
+
+  .back-btn:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+  }
+
+  .save-btn {
+    background-color: var(--primary-color);
+    color: white;
+  }
+
+  .save-btn:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+  }
+
+  .icon {
+    font-size: 16px;
+  }
+
+  @media (max-width: 768px) {
+    header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+
+    .form-card {
+      padding: 20px;
+    }
+  }
+</style>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Member Home - SEU Library</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<header>
+    <h1>Welcome, <span th:text="${member.name}">Member</span></h1>
+    <button class="signout-btn" onclick="location.href='/'">Sign Out</button>
+</header>
+
+<main>
+
+    <section class="books">
+        <h2>Available Books</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Book Title</th>
+                <th>Author</th>
+                <th>Available Copies</th>
+            </tr>
+            </thead>
+            <tbody id="availableBooksTable">
+            <th:block th:each="book : ${availableBooks}">
+                <tr>
+                    <td th:text="${book.title}"></td>
+                    <td th:text="${book.author}"></td>
+                    <td th:text="${book.availableCopies}"></td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="borrowed">
+        <h2>Your Borrowed Books</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Book Title</th>
+                <th>Borrow Date</th>
+                <th>Return Date</th>
+                <th>Late Fine</th>
+            </tr>
+            </thead>
+            <tbody id="borrowedBooksTable">
+            <th:block th:each="borrowedBook : ${borrowedBooks}">
+                <tr>
+                    <td th:text="${borrowedBook.book.title}"></td>
+                    <td th:text="${borrowedBook.borrowedDate}"></td>
+                    <td th:text="${borrowedBook.returnedDate != null ? borrowedBook.returnedDate : 'Not Returned Yet'}"></td>
+                    <td th:text="${borrowedBook.fine}"></td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </section>
+
+</main>
+
+</body>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 0;
+    }
+
+    header {
+        background-color: #0056b3;
+        color: white;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: 28px;
+    }
+
+    .signout-btn {
+        background-color: #dc3545;
+        border: none;
+        padding: 10px 20px;
+        color: white;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .signout-btn:hover {
+        background-color: #c82333;
+    }
+
+    main {
+        padding: 30px;
+    }
+
+    section {
+        background-color: white;
+        padding: 20px;
+        margin-bottom: 30px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    section h2 {
+        color: #333;
+        margin-bottom: 15px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+
+    th, td {
+        border: 1px solid #ccc;
+        padding: 12px 15px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #e6f0ff;
+        color: #0056b3;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+
+</style>
+
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lend Book</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<header>
+    <h1>Lend Book</h1>
+</header>
+
+<main>
+    <section class="form-container">
+        <form th:action="@{/admin/admin_lend_book}" method="post">
+            <label for="bookId">Select Book:</label>
+            <select name="bookId" id="bookId" required>
+                <th:block th:each="book : ${books}">
+                    <option th:value="${book.bookId}" th:text="${book.title}"></option>
+                </th:block>
+            </select>
+
+            <label for="memberId">Member ID:</label>
+            <input type="number" name="memberId" id="memberId" required />
+
+            <label for="returnDate">Return Date:</label>
+            <input type="date" name="returnDate" id="returnDate" required />
+
+            <button type="submit">Lend Book</button>
+        </form>
+    </section>
+
+    <!-- Display success or error messages -->
+    <div th:if="${success}">
+        <p class="success" th:text="${success}"></p>
+    </div>
+    <div th:if="${error}">
+        <p class="error" th:text="${error}"></p>
+    </div>
+
+    <section class="navigation">
+        <a th:href="@{/admin/home}">
+            <button type="button" class="back-btn">Back to Admin Home</button>
+        </a>
+    </section>
+</main>
+
+</body>
+
+<style>
+    body {
+        background-color: #f2f2f2;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    header {
+        background-color: #0056b3;
+        color: white;
+        padding: 20px;
+        text-align: center;
+    }
+
+    h1 {
+        margin: 0;
+    }
+
+    main {
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .form-container {
+        background-color: white;
+        padding: 30px;
+        display: inline-block;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 500px;
+        margin-bottom: 30px;
+    }
+
+    label {
+        font-weight: bold;
+        margin-top: 15px;
+        display: block;
+    }
+
+    select, input {
+        display: block;
+        margin: 10px auto;
+        padding: 12px;
+        width: 90%;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    button {
+        padding: 12px 25px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    .back-btn {
+        padding: 12px 25px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+        width: 100%;
+    }
+
+    .back-btn:hover {
+        background-color: #218838;
+    }
+
+    .navigation {
+        width: 100%;
+        max-width: 500px;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .success, .error {
+        margin-top: 20px;
+        padding: 10px;
+        font-size: 16px;
+        color: white;
+        border-radius: 5px;
+    }
+
+    .success {
+        background-color: #28a745;
+    }
+
+    .error {
+        background-color: #dc3545;
+    }
+</style>
+
+</html>
